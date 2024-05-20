@@ -18,7 +18,6 @@ const main = async()=>{
 //         categorySet.add(categoryName);
 //         return prisma.category.create({
 //             data:{
-//                 categoryId:uuidv4(),
 //                 categoryName: categoryName,
 //                 categoryDescription: faker.lorem.words(20),
 //             }
@@ -43,7 +42,6 @@ const main = async()=>{
 //         userEmailSet.add(userEmail);
 //         return prisma.user.create({
 //             data:{
-//                 userId:uuidv4(),
 //                 userName:userName,
 //                 email:userEmail,
 //                 password: faker.internet.password(),
@@ -91,7 +89,6 @@ const main = async()=>{
 //     Array.from({length:50}).map(async()=>{
 //         return prisma.product.create({
 //             data:{
-//                 productId:uuidv4(),
 //                 productName: faker.commerce.productName(),
 //                 productDescription: faker.lorem.words(10),
 //                 productPrice: faker.commerce.price(),

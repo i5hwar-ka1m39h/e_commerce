@@ -15,12 +15,13 @@ datasource db {
 
 
 model User{
-  userId String @id @default(uuid())
+  userId String @id @default(uuid()) 
   userName String @unique
   password String
   email String @unique
   createAt  DateTime @default(now())
   isAdmin  Boolean @default(false)
+  Cart Cart? 
   orders Order[]
   products Product[] @relation("AdminsProduct")
 }
@@ -32,9 +33,10 @@ model Product{
   productPrice Decimal
   quantity Int
   adminId String
-  admin User @relation("AdminsProduct",fields: [adminId], references: [userId])
+  admin User? @relation("AdminsProduct",fields: [adminId], references: [userId])
   createdAt DateTime @default(now())
-  orderDetail OrderDetail[]
+  orderItems OrderItem[]
+  cartItems CartItem[]
   categoryId String
   category Category @relation(fields: [categoryId], references: [categoryId])
   
@@ -46,27 +48,42 @@ model Category{
   categoryDescription String?
   products Product[]
 }
-
 model Order{
   orderId String @id @default(uuid())
-  total Decimal
-  status String
   userId String
   user User @relation(fields: [userId], references: [userId])
+  status String
   createdAt DateTime @default(now())
-  details OrderDetail[]
-
+  totalAmount Decimal
+  orderItems OrderItem[]
 }
 
-
-model OrderDetail{
-  order Order @relation(fields: [orderId], references: [orderId])
-  orderId String 
-  product Product @relation(fields: [productId], references: [productId])
+model OrderItem{
+  orderItemId String @id @default(uuid())
+  orderId String
   productId String
   quantity Int
   price Decimal
-  createdAt DateTime @default(now())
-  @@id([productId, orderId])
+  order Order @relation(fields: [orderId], references: [orderId])
+  product Product @relation(fields: [productId], references: [productId])
+}
 
+model Cart{
+  cartId String @id @default(uuid())
+  userId String @unique
+  user User @relation(fields: [userId], references: [userId])
+  cartitems CartItem[]
+  totalPrice Decimal
+  createdAt DateTime @default(now())
+}
+
+model CartItem{
+  cartItemId String @id @default(uuid())
+  cartId String
+  cart Cart @relation(fields: [cartId], references: [cartId])
+  productId String
+  createdAt DateTime @default(now())
+  product Product @relation(fields: [productId], references: [productId])
+  quantity Int
+  totalPrice Decimal
 }
