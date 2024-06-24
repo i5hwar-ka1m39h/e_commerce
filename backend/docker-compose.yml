@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3000:3000'   
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - DATABASE_URL=postgres://admin:123@db:5432/webDB?schema=public" 
+    depends_on:
+      - db            #
+
+  db:
+    image: postgres:latest
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: 123
+      POSTGRES_DB: webDB
+    volumes:
+      - postgres_data:/var/lib/postgresql/data   
+
+volumes:
+  postgres_data:   

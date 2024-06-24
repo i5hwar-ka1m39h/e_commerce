@@ -1,7 +1,7 @@
 import {faker} from '@faker-js/faker'
 import { PrismaClient } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
-
+import path from 'path';
 
 const prisma = new PrismaClient();
 
@@ -80,10 +80,6 @@ const main = async()=>{
 // const categoryForProduct = randomizer(categoriesId)
 
 
-
-
-
-
 //seeding product 4th step
 // const products = await Promise.all(
 //     Array.from({length:50}).map(async()=>{
@@ -101,10 +97,6 @@ const main = async()=>{
 //     })
 // )
 // console.log(products);
-
-
-
-
 }
 
 
@@ -124,5 +116,6 @@ main().then(async()=>{
     process.exit(1)
     
 })
+
 
 

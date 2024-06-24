@@ -34,6 +34,7 @@ model Product{
   quantity Int
   adminId String
   admin User? @relation("AdminsProduct",fields: [adminId], references: [userId])
+  imageUrl String?
   createdAt DateTime @default(now())
   orderItems OrderItem[]
   cartItems CartItem[]
